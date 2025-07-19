@@ -15,7 +15,7 @@ WORKDIR /opt/server
 
 COPY src /opt/server
 
-RUN pip install --upgrade pip && \
+RUN pip install --upgrade pip && pip install uwsgi\
     pip install -r requirements.txt
 
 
@@ -25,7 +25,7 @@ RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 WORKDIR /opt/server
 USER roboshop
 COPY --from=builder /opt/server /opt/server
-CMD ["python", "main.py"]
+CMD [ "uwsgi", "--ini", "payment.ini" ]
 
 
 
