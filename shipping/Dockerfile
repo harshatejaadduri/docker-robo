@@ -1,10 +1,10 @@
-FROM maven:3.9.6-alpine AS builder
+FROM maven:3.9-alpine AS builder
 WORKDIR /opt/server
 COPY src /opt/server/src
 COPY pom.xml .
 RUN mvn clean package
 
-FROM maven:3.9.6-alpine
+FROM maven:3.9-alpine
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
