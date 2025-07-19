@@ -1,7 +1,8 @@
 FROM python:3.9.23-alpine AS builder
 WORKDIR /opt/server
 COPY src /opt/server
-RUN pip3 install -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 
 FROM python:3.9.23-alpine
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
