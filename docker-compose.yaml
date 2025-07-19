@@ -10,12 +10,12 @@ volumes:
   rabbitmq:
 services:
   mongodb:
-   image: harshatejaadduri/mongodb:v1
+   image: harshatejaadduri/mongodb:v2
    container_name: mongodb
    volumes:
      - mongodb:/data/db
   catalogue:
-   image: harshatejaadduri/catalogue:v1
+   image: harshatejaadduri/catalogue:v2
    container_name: catalogue
    depends_on: 
    - mongodb
@@ -25,24 +25,24 @@ services:
     volumes:
       - redis:/data
   user:
-    image: harshatejaadduri/user:v1
+    image: harshatejaadduri/user:v2
     container_name: user
     depends_on:
     - redis
     - mongodb
   cart:
-    image: harshatejaadduri/cart:v1
+    image: harshatejaadduri/cart:v2
     container_name: cart
     depends_on:
     - redis
     - catalogue
   mysql:
-    image: harshatejaadduri/mysql:v1
+    image: harshatejaadduri/mysql:v2
     container_name: mysql
     volumes:
       - mysql:/var/lib/mysql
   shipping:
-    image: harshatejaadduri/shipping:v1
+    image: harshatejaadduri/shipping:v2
     container_name: shipping
     depends_on:
       - cart
@@ -56,7 +56,7 @@ services:
     volumes:
       - rabbitmq:/var/lib/rabbitmq  
   payment:
-    image: harshatejaadduri/payment:v1
+    image: harshatejaadduri/payment:v2
     container_name: payment
     environment:
        CART_HOST: cart
@@ -71,7 +71,7 @@ services:
       - user
       - rabbitmq
   frontend:
-    image: harshatejaadduri/frontend:v1
+    image: harshatejaadduri/frontend:v2
     container_name: frontend
     ports:
       - "80:80"
