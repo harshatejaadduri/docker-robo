@@ -1,4 +1,4 @@
-FROM python:3.9.23-alpine
+FROM python:3.9.23-alpine AS builder
 
 # Install build tools and uWSGI dependencies
 RUN apk add --no-cache \
