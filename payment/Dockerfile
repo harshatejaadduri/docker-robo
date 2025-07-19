@@ -4,7 +4,7 @@ COPY src /opt/server
 RUN  pip install -r requirements.txt
 
 FROM python:3.9-slim
-RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
+RUN addgroup --system roboshop && adduser --system --ingroup roboshop roboshop
 WORKDIR /opt/server
 USER roboshop
 COPY --from=builder /opt/server /opt/server
