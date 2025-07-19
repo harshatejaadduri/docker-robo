@@ -1,6 +1,6 @@
 FROM maven:3.5.3-jdk-8-alpine AS builder
 WORKDIR /opt/server
-COPY main /opt/server
+COPY main /opt/server/main
 COPY pom.xml .
 RUN mvn clean package
 
@@ -11,6 +11,7 @@ ENV CART_ENDPOINT="cart:8080" \
 WORKDIR /opt/server
 USER roboshop
 COPY --from=builder /opt/server /opt/server
+COPY --from=builder /opt/server/main /opt/server
 CMD [ "java","-jar","shipping.jar" ]
 
 
