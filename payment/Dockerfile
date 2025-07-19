@@ -1,6 +1,6 @@
 FROM python:3.9-alpine AS builder
 WORKDIR /opt/server
-COPY src/* /opt/server
+COPY src /opt/server
 RUN pip3 install -r requirements.txt
 
 FROM python:3.9-alpine
