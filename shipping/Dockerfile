@@ -11,9 +11,8 @@ ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
 WORKDIR /opt/server
 COPY --from=builder /opt/server /opt/server
-USER roboshop
 CMD [ "java","-jar","shipping.jar" ]
-
+USER roboshop
 
 # FROM maven:3.5.3-jdk-8-alpine
 # WORKDIR /opt/server
