@@ -38,6 +38,9 @@ services:
   mysql:
     image: harshatejaadduri/mysql:v2
     container_name: mysql
+    environment:
+      MYSQL_DATABASE: cities
+      MYSQL_ROOT_PASSWORD: RoboShop@1
     volumes:
     - mysql:/var/lib/mysql
   shipping:
