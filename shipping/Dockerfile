@@ -9,9 +9,9 @@ RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
 WORKDIR /opt/server
-USER roboshop
 COPY --from=builder /opt/server /opt/server
 COPY --from=builder /opt/server/src /opt/server
+USER roboshop
 CMD [ "java","-jar","shipping.jar" ]
 
 
