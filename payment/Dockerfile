@@ -1,16 +1,4 @@
 FROM python:3.9.23-alpine AS builder
-
-# Install build tools and uWSGI dependencies
-RUN apk add --no-cache \
-    gcc \
-    musl-dev \
-    linux-headers \
-    python3-dev \
-    libffi-dev \
-    openssl-dev \
-    build-base \
-    pcre-dev
-
 WORKDIR /opt/server
 
 COPY src /opt/server
