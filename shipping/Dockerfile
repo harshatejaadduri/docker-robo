@@ -1,6 +1,6 @@
 FROM maven:3.5.3-jdk-8-alpine AS builder
 WORKDIR /opt/server
-COPY src /opt/server
+COPY main /opt/server
 COPY pom.xml .
 RUN mvn clean package
 
