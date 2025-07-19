@@ -1,12 +1,27 @@
-FROM python:3.9-slim AS builder
+FROM python:3.9.23-alpine
+
+# Install build tools and uWSGI dependencies
+RUN apk add --no-cache \
+    gcc \
+    musl-dev \
+    linux-headers \
+    python3-dev \
+    libffi-dev \
+    openssl-dev \
+    build-base \
+    pcre-dev
+
 WORKDIR /opt/server
+
 COPY src /opt/server
+
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 
-FROM python:3.9-slim
-RUN addgroup --system roboshop && adduser --system --ingroup roboshop roboshop
+
+FROM python:3.9.23-alpine
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 WORKDIR /opt/server
 USER roboshop
 COPY --from=builder /opt/server /opt/server
