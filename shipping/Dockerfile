@@ -1,17 +1,15 @@
 FROM maven:3.5.3-jdk-8-alpine AS builder
 WORKDIR /opt/server
-COPY main /opt/server/main
+COPY src /opt/server/src
 COPY pom.xml .
 RUN mvn clean package
 
-FROM maven:3.5.3-jdk-8-alpine
-RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
+FROM maven:3.5.3-jdk-8-alpineRUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
 WORKDIR /opt/server
 USER roboshop
 COPY --from=builder /opt/server /opt/server
-COPY --from=builder /opt/server/main /opt/server
 CMD [ "java","-jar","shipping.jar" ]
 
 
