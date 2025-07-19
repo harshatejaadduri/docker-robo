@@ -1,9 +1,9 @@
-FROM python:python:3.9-slim AS builder
+FROM python:3.9-slim AS builder
 WORKDIR /opt/server
 COPY src /opt/server
 RUN  pip install -r requirements.txt
 
-FROM python:python:3.9-slim
+FROM python:3.9-slim
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 WORKDIR /opt/server
 USER roboshop
