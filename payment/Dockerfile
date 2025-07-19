@@ -15,7 +15,8 @@ WORKDIR /opt/server
 
 COPY src /opt/server
 
-RUN pip install --upgrade pip && pip install uwsgi\
+RUN pip install --upgrade pip \
+    pip install uwsgi\
     pip install -r requirements.txt
 
 
