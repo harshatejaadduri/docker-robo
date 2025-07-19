@@ -1,7 +1,9 @@
 FROM python:3.9-slim AS builder
 WORKDIR /opt/server
 COPY src /opt/server
-RUN  pip install -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --prefer-binary -r requirements.txt
+
 
 FROM python:3.9-slim
 RUN addgroup --system roboshop && adduser --system --ingroup roboshop roboshop
