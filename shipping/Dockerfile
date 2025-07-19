@@ -10,7 +10,6 @@ ENV CART_ENDPOINT="cart:8080" \
     DB_HOST="mysql"
 WORKDIR /opt/server
 COPY --from=builder /opt/server /opt/server
-COPY --from=builder /opt/server/src /opt/server
 CMD [ "java","-jar","shipping.jar" ]
 
 
