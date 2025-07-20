@@ -1,7 +1,12 @@
 FROM python:3.9.23-alpine AS builder
 WORKDIR /opt/server
-
-COPY src /opt/server
+COPY src/* /opt/server
+RUN apt-get update && apt-get install -y \
+    gcc \
+    python3-dev \
+    libffi-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip && \
     pip install uwsgi && \
