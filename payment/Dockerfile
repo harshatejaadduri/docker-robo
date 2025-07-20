@@ -1,6 +1,4 @@
 FROM python:3.9.23-alpine AS builder
-WORKDIR /opt/server
-
 RUN apk add --no-cache \
     gcc \
     musl-dev \
@@ -8,8 +6,9 @@ RUN apk add --no-cache \
     libffi-dev \
     build-base \
     linux-headers
-
-COPY src/* /opt/server
+    
+WORKDIR /opt/server
+COPY src /opt/server
 
 RUN pip install --upgrade pip && \
     pip install uwsgi && \
