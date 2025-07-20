@@ -19,7 +19,7 @@ RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 WORKDIR /opt/server
 USER roboshop
 COPY --from=builder /opt/server /opt/server
-CMD [ "--ini", "payment.ini" ]
+CMD [ "payment.ini" ]
 
 
 
