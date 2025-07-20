@@ -47,6 +47,10 @@ services:
     depends_on:
     - mysql
     - cart
+    deploy:
+      resources:
+        limits:
+          memory: 1g
       
   rabbitmq:
     image: rabbitmq:3-alpine
