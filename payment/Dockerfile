@@ -1,18 +1,18 @@
 FROM python:3.9.23-alpine AS builder
 WORKDIR /opt/server
-COPY src/* /opt/server
-RUN apt-get update && apt-get install -y \
+
+RUN apk add --no-cache \
     gcc \
+    musl-dev \
     python3-dev \
     libffi-dev \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+    build-base
+
+COPY src/* /opt/server
 
 RUN pip install --upgrade pip && \
     pip install uwsgi && \
     pip install -r requirements.txt
-
-
 
 FROM python:3.9.23-alpine
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
