@@ -40,7 +40,7 @@ services:
     container_name: mysql
     volumes:
     - mysql:/var/lib/mysql
-    - ./init-scripts:/docker-entrypoint-initdb.d
+    
   shipping:
     image: harshatejaadduri/shipping:v2
     container_name: shipping
