@@ -8,8 +8,8 @@ RUN apk add --no-cache \
     linux-headers
 
 WORKDIR /opt/server
-COPY src /opt/server
-
+COPY src/* /opt/server
+EXPOSE 8080
 RUN pip install --upgrade pip && \
     pip install uwsgi && \
     pip install -r requirements.txt
