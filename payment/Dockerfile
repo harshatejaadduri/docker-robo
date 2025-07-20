@@ -17,9 +17,8 @@ RUN pip install --upgrade pip && \
 FROM python:3.9.23-alpine
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 WORKDIR /opt/server
-USER roboshop
 COPY --from=builder /opt/server /opt/server
-CMD [ "payment.ini" ]
+CMD [ "uwsgi", "--ini", "payment.ini" ]
 
 
 
