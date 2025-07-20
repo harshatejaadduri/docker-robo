@@ -8,7 +8,7 @@ RUN apk add --no-cache \
     linux-headers
 
 WORKDIR /opt/server
-COPY src /opt/server
+COPY src /opt/server/src
 EXPOSE 8080
 RUN pip install --upgrade pip && \
     pip install uwsgi && \
