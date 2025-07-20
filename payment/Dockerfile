@@ -6,7 +6,8 @@ RUN apk add --no-cache \
     musl-dev \
     python3-dev \
     libffi-dev \
-    build-base
+    build-base \
+    linux-headers
 
 COPY src/* /opt/server
 
