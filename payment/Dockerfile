@@ -1,11 +1,31 @@
 FROM python:3.9 AS builder
 WORKDIR /opt/server
-COPY src /opt/server
+COPY src/* .
+RUN apk add --no-cache \
+    gcc \
+    musl-dev \
+    python3-dev \
+    libffi-dev \
+    build-base \
+    linux-headers && \
+    pip install --upgrade pip && \
+    pip install uwsgi && \
+    pip install -r requirements.txt
+
 RUN pip3 install -r requirements.txt
 
 FROM python:3.9.23-alpine
 WORKDIR /opt/server
-COPY --from=builder /opt/server /opt/server
+RUN apk add --no-cache pcre
+# Create app user
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
+USER roboshop
+# Copy installed Python packages from builder
+COPY --from=builder /install /usr/local
+# Copy application code
+COPY --chown=roboshop:roboshop payment.ini .
+COPY --chown=roboshop:roboshop *.py .
+
 CMD [ "uwsgi", "--ini", "payment.ini" ]
 
 
@@ -18,13 +38,3 @@ CMD [ "uwsgi", "--ini", "payment.ini" ]
 
 
 
-# RUN apk add --no-cache \
-#     gcc \
-#     musl-dev \
-#     python3-dev \
-#     libffi-dev \
-#     build-base \
-#     linux-headers && \
-#     pip install --upgrade pip && \
-#     pip install uwsgi && \
-#     pip install -r requirements.txt
