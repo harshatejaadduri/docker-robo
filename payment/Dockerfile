@@ -36,6 +36,7 @@ WORKDIR /opt/server
 COPY src /opt/server
 
 FROM python:3.9.23-alpine
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 WORKDIR /opt/server
 COPY --from=builder /opt/server /opt/server
 RUN apk add --no-cache \
@@ -48,7 +49,7 @@ RUN apk add --no-cache \
     pip install --upgrade pip && \
     pip install uwsgi && \
     pip install -r requirements.txt
-    
+USER roboshop    
 CMD [ "uwsgi", "--ini", "payment.ini" ]
 
 
