@@ -1,6 +1,6 @@
 FROM python:3.9 AS builder
 WORKDIR /opt/server
-COPY src/* .
+COPY src/* /opt/server
 RUN apk add --no-cache \
     gcc \
     musl-dev \
