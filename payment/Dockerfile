@@ -36,7 +36,7 @@ WORKDIR /opt/server
 COPY src /opt/server
 
 FROM python:3.9.23-alpine
-RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
+RUN addgroup -S -g 1001 roboshop && adduser -S -u 1001 -G roboshop roboshop
 WORKDIR /opt/server
 COPY --from=builder /opt/server /opt/server
 RUN apk add --no-cache \
